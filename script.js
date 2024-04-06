@@ -1,37 +1,43 @@
 //your code here
 function handleDragStart(event) {
-    event.dataTransfer.setData("text/plain", event.target.id);
-  }
+  console.log("Drag start:", event.target.id);
+  event.dataTransfer.setData("text/plain", event.target.id);
+}
 
-  // Function to handle drag over event
-  function handleDragOver(event) {
-    event.preventDefault();
-  }
+function handleDragOver(event) {
+  console.log("Drag over:", event.target.id);
+  event.preventDefault();
+}
 
-  // Function to handle drop event
-  function handleDrop(event) {
-    event.preventDefault();
-    const draggedId = event.dataTransfer.getData("text/plain");
-    const droppedId = event.target.id;
+function handleDrop(event) {
+  console.log("Drop:", event.target.id);
+  event.preventDefault();
+  const draggedId = event.dataTransfer.getData("text/plain");
+  const droppedId = event.target.id;
 
-    const draggedElement = document.getElementById(draggedId);
-    const droppedElement = document.getElementById(droppedId);
+  console.log("Dragged ID:", draggedId);
+  console.log("Dropped ID:", droppedId);
 
-    // Swap background images
+  const draggedElement = document.getElementById(draggedId);
+  const droppedElement = document.getElementById(droppedId);
+
+  console.log("Dragged element:", draggedElement);
+  console.log("Dropped element:", droppedElement);
+
+  if (draggedElement && droppedElement) {
     const tempBgImage = draggedElement.style.backgroundImage;
     draggedElement.style.backgroundImage = droppedElement.style.backgroundImage;
     droppedElement.style.backgroundImage = tempBgImage;
 
-    // Update ids
     draggedElement.id = droppedId;
     droppedElement.id = draggedId;
   }
+}
 
-  // Add event listeners to each image div
-  const imageDivs = document.querySelectorAll(".image");
-  imageDivs.forEach((div) => {
-    div.addEventListener("dragstart", handleDragStart);
-    div.addEventListener("dragover", handleDragOver);
-    div.addEventListener("drop", handleDrop);
-    div.setAttribute("draggable", true);
-  });
+const imageDivs = document.querySelectorAll(".image");
+imageDivs.forEach((div) => {
+  div.addEventListener("dragstart", handleDragStart);
+  div.addEventListener("dragover", handleDragOver);
+  div.addEventListener("drop", handleDrop);
+  div.setAttribute("draggable", true);
+});

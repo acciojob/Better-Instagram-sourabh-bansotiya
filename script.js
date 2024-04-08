@@ -1,4 +1,7 @@
 //your code here
+
+
+
 function handleDragStart(event) {
   console.log("Drag start:", event.target.id);
   event.dataTransfer.setData("text/plain", event.target.id);
@@ -41,3 +44,4 @@ imageDivs.forEach((div) => {
   div.addEventListener("drop", handleDrop);
   div.setAttribute("draggable", true);
 });
+
